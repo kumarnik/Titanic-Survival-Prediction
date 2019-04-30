@@ -1,6 +1,7 @@
 #First of all we have to prepare our data because there can be NA values,missing data,outliers,and some of the non significant attributes.
 #combining both the training and testing dataset for data cleaning and prepartion.
 
+test$Survived<- 0
 full_data <- rbind(train,test)
 
 #see the structure and summary
