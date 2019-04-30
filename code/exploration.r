@@ -36,3 +36,29 @@ ggplot(train_cleaned)+geom_boxplot(aes(x=factor(Survived),y=Fare))
 #multivariate analysis
 xtabs(~Survived+Pclass+Sex,train_cleaned)
 xtabs(~Survived+Embarked+Sex,train_cleaned)
+
+#feature added
+full$Child<-NA
+full$Child<- ifelse(full$Age>18,0,1)
+str(full$Child)
+table(full$Child)
+ggplot(full)+geom_bar(aes(x=Child))
+                               
+                               
+#adding family size feature 
+full$Familysize<- full$Sibsp+full$Parch+1
+table(full$Familysize)
+ggplot(full)+geom_bar(aes(x=Familysize)) 
+                               
+#split the full data into train and test
+train_featured<- full[1:891,]
+test_featured<- full[892:1309,]
+                               
+#change the attibutes into factors
+train_featured$Sex<- as.factor(train_featured$Sex)
+train_featured$Survived<- as.factor(train_featured$Survived)
+train_featured$Embarked<- as.factor(train_featured$Embarked)
+test_featured$Sex<- as.factor(test_featured$Sex)
+test_featured$Survived<- as.factor(test_featured$Survived)
+test_featured$Embarked<- as.factor(test_featured$Embarked)                               
+                               
